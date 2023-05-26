@@ -1,4 +1,7 @@
 <template>
+    <transition name="upcoming-item" mode="out-in">
+    
+    
     <div class="main__upcoming-item">
         <img src="@/assets/images/bg.png" class="main__upcoming-item-img" alt="">
         <div class="main__upcoming-content">
@@ -21,6 +24,8 @@
             <div class="main__upcoming-next-line"></div>
         </div>
     </div>
+    
+</transition>
 </template>
 
 <script setup>
