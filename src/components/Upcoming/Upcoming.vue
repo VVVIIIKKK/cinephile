@@ -1,11 +1,12 @@
 <template>
     <transition name="upcoming" mode="out-in">
-        <div class="main__upcoming">
+        <div class="main__upcoming" v-if="getUpcomingArr">
             <UpcomingItem v-for="(movie, idx) in getUpcomingArr" :key="movie.id" :movie="movie" :idx="idx"
                 @slideNext="slideNext" :slideView="slideView"
                 :next="getUpcomingArr[idx + 1 == getUpcomingArr.length ? 0 : idx + 1]" />
 
         </div>
+        <Loader  v-else/>
     </transition>
 </template>
 
