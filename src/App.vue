@@ -1,10 +1,9 @@
 <template>
   <div class="wrapper">
-    <div class="content">
+    
       <Header />
       <router-view />
-    </div>
-    <Footer />
+   
   </div>
 </template>
 
