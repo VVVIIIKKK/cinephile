@@ -5,7 +5,8 @@
             <img src="@/assets/images/arrow.png" alt="">
         </router-link>
         <Swiper :modules="modules" :space-between="25" :navigation="true" :breakpoints="swiperOptions.breakpoints">
-            <Swiper-slide class="main__video-item" v-for="(item, idx) in content" :key="item.id">
+            <Swiper-slide class="main__video-item" v-for="(item, idx) in content" :key="item.id" @click="getItem(item)">
+
                 <img v-lazy="imgUrlFull + item.poster_path" alt="" class="main__video-item-img">
                 <router-link :to="`${props.type}/`" class="main__video-item-link" />
                 <h2 class="main__video-item-title">{{ item.title || item.name }}</h2>
@@ -17,7 +18,7 @@
             </Swiper-slide>
 
         </Swiper>
-        <div class="main__inf" :class="{ active: open }">
+        <div class="main__inf" :class="{ active: open }" ref="inf">
             <InfoBlock :current="current" :type="type" @close="close" />
         </div>
     </section>
@@ -65,9 +66,21 @@ onMounted(() => {
 
 let current = ref(null)
 let inf = ref(null)
-let open = ref(true)
+let open = ref(false)
+const getItem = async item => {
+    current.value = null
+    current.value = item
+    open.value = true
+    let infTop = inf.value.offsetTop
+    window.scrollTo({
+        top:infTop - navHeight.offsetHeight,
+        behavior: 'smooth'
+    })
+}
+
 const close = () => {
-    console.log(current.value);
+    open.value = false
+    current.value = null
 }
 </script>
 
