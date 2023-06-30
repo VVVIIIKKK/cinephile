@@ -33,9 +33,11 @@ import { usePopular } from '@/stores/popular'
 import { onMounted, ref, computed } from 'vue';
 import { imgUrl, imgUrlFull } from "@/static.js";
 import InfoBlock from '@/components/Infoblock/Infoblock.vue'
+import {useItemId} from '@/stores/itemid'
 
 const props = defineProps(['type'])
 const popular = usePopular()
+const itemIdStore = useItemId()
 
 let modules = ref([Navigation])
 let swiperOptions = ref({
@@ -69,7 +71,8 @@ let inf = ref(null)
 let open = ref(false)
 const getItem = async item => {
     current.value = null
-    current.value = item
+    await  itemIdStore.getItemId({type:props.type, id: item.id})
+    current.value = props.type == 'movie' ? itemIdStore.movie : itemIdStore.tv    
     open.value = true
     let infTop = inf.value.offsetTop
     window.scrollTo({
