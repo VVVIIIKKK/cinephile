@@ -14,9 +14,9 @@
                             new Date (current.first_air_date).getFullYear() || 
                             new Date (current.release_date).getFullYear()  ||
                             'Недавно'                         
-                        }},&nbsp;
+                        }}
                         </span>
-                        <span> боевик, приключения, фэнтези</span>
+                        <span> {{ getGenres }}</span>
                     </p>
                 </div>
                 <BtnMore/>
@@ -27,6 +27,7 @@
 
 <script setup>
 import { imgUrlFull } from '@/static'
+import {computed} from 'vue'
 const props = defineProps(['current', 'type'])
-
+const getGenres = computed (() => props.current.genres.reduce((acc, item) => acc + `, ${item.name}`, "" ))
 </script>
